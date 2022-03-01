@@ -1,0 +1,52 @@
+
+<%= link_to "View All Product", root_path%>
+<%= link_to "View Order History", "/orders",style: 'float:right'%>
+<div style="text-align:center"> 
+    <h2>Cart</h2> 
+  <h4>Total <%= @carts.count %> products in cart</h4>
+</div>
+<div style="text-align:right"> 
+
+</div>
+  <ul style="list-style-type: none;">
+<% @carts.each do |item| %>
+    <li class="li-product-cart">
+        <div class="left-img"><%= image_tag item.product.image.url(:thumb) %></div>
+        <div class="right-text">
+          <p><%= link_to item.product.title , "/products/#{item.product.id}",style: 'text-decoration: none;' %><br>
+              Total Price: <%= item.product.price %> * <%= item.quantity %> = <%= item.product.price * item.quantity %><br>
+              Quantity:<strong><%= item.quantity %></strong> 
+          </p>
+        </div>   
+      
+        <div class="button-left">
+            <button><%= link_to "Remove","carts/#{item.id}",method: :delete,data: {confirm: 'Are You Sure?'}, style: 'color:#FFFFFF;text-decoration: none;' %></button>
+        </div>   
+    </li>
+<% end %>
+<div style="text-align:center"> 
+    <strong style="margin:0px 0 0 -123px">Total:<%= @total_price %></strong> <br>
+    <% if @carts.count > 0 %>
+    <button class="order-button" onclick="document.getElementById('id01').style.display='block'">Place Order</button>
+    <% end %>
+</div>
+</ul>
+
+
+
+<div id="id01" class="modal">
+  <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+  <form class="modal-content" action="/action_page.php">
+    <div class="container">
+      <h3>Order Details</h3>
+      <h5>Total amount:<%= @total_price %></h5>
+      <h5>Email:<%= @userEmail%></h5>
+      <h5>Total items:<%= @carts.count %></h5>
+      <div class="clearfix">
+        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn button-1">Cancel</button>
+        <button type="button" class="deletebtn button-1"><%= link_to "Place Order","orders/add", style: 'color:#FFFFFF;text-decoration: none;' %></button>
+      </div>
+    </div>
+  </form>
+</div>
+

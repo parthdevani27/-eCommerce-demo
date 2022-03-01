@@ -1,0 +1,33 @@
+<% if user_signed_in? %>
+  Logged in as <strong><%= current_user.email %></strong>.
+  <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
+  <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+  <span style="float:right;margin-right:40px"><%= link_to "Go To Cart","/carts" %></span>
+<% else %>
+  <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
+  <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
+<% end %>
+
+</p>
+<h2 style="text-align:center">Products</h2>
+<ul style="list-style-type: none;">
+  <% @products.each do |item| %>
+      <li class="li-product">
+        <div class="left-img"><%= image_tag item.image.url(:thumb) %></div>
+        <div class="right-text">
+          <p><%= link_to item.title , "/products/#{item.id}",style: 'text-decoration: none;' %><br>
+              Price:<%= item.price %><br>
+              <strong><%= item.quantity %></strong> products left.
+          </p>
+        </div>   
+        <div class="button-left">
+            <button><%= link_to "View Details", "/products/#{item.id}", style: 'color:#FFFFFF;text-decoration: none;'%></button>
+            <button><%= link_to "Add To Cart", "/carts/add/#{item.id}", style: 'color:#FFFFFF;text-decoration: none;'%></button>
+        </div>  
+    </li>
+  <% end %>
+</ul>
+
+
+
+

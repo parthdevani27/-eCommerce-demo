@@ -1,0 +1,28 @@
+<%= link_to "View All Product", root_path%>
+<%= link_to "Go To Cart", "/carts",style: 'float:right'%>
+<div style="text-align:center"> 
+    <h2>Orders History</h2> 
+</div>
+<div style="text-align:right"> 
+
+</div>
+  
+  <ul style="list-style-type: none;">
+<% @orders.each do |item| %>
+    <li class="li-product-cart">
+        <div class="left-img"><%= image_tag item.product.image.url(:thumb) %></div>
+        <div class="right-text">
+          <p><%= link_to item.product.title , "/products/#{item.product.id}",style: 'text-decoration: none;' %> <br>
+              Total Price:<%= item.product.price * item.quantity  %> ||
+              quantity:<%= item.quantity %><br>
+              <%= item.product.created_at %>
+          </p>
+        </div>   
+      
+        <div class="button-left">
+            <button><%= link_to "View Product Details", "/products/#{item.product.id}", style: 'color:#FFFFFF;text-decoration: none;'%></button>
+        </div>   
+    </li>
+<% end %>
+</ul>
+

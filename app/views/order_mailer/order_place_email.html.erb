@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+<h2>Hello, <%= @user.email %></h2>
+<p>
+  Your order has been placed,Thanks for order<br>
+  Check your order details down below.<br>
+  <ul>
+    <% @carts.each do |item| %>
+    <li>
+      <% if item.product.quantity >= item.quantity %>
+        Product Name:<%= item.product.title %><br>
+        Quantity:<%= item.quantity %><br>
+        Price:<%= item.product.price * item.quantity%>
+      <% else %>
+          <%= item.product.title %> is out of stock,so this order is not placed
+      <% end %>
+    </li>
+    <% end %>
+  </ul>
+</p>
+  </body>
+</html>

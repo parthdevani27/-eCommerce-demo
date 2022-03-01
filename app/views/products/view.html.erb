@@ -1,0 +1,8 @@
+
+  <img src="<%= @product.image.url(:standard) %>"" alt="<%= @product.title %>" > 
+  <h1><%= @product.title %></h1>
+  <p class="price">Price: <%= @product.price %>
+  </p>
+  <span><strong><%= @product.quantity %> product in stock</strong></span>
+<p><button><%= link_to "Add To Cart", "/carts/add/#{@product.id}", style: 'color:#FFFFFF;text-decoration: none;'%></button></p>
+<p><%= @product.description %></p>
