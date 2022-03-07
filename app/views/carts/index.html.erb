@@ -17,10 +17,17 @@
               Total Price: <%= item.product.price %> * <%= item.quantity %> = <%= item.product.price * item.quantity %><br>
               Quantity:<strong><%= item.quantity %></strong> 
           </p>
-        </div>   
-      
+        </div>  
+
+
         <div class="button-left">
-            <button><%= link_to "Remove","carts/#{item.id}",method: :delete,data: {confirm: 'Are You Sure?'}, style: 'color:#FFFFFF;text-decoration: none;' %></button>
+          <% if item.product.quantity > item.quantity %>
+        <%= link_to '<button type="button" class="btn btn-danger">+</button>'.html_safe , "/products/increment/#{item.id}",style: 'text-decoration: none;color:white' %>
+          <% end %>
+          <% if item.quantity > 1  %>
+        <%= link_to '<button type="button" class="btn btn-info">-</button>'.html_safe , "/products/decrement/#{item.id}",style: 'text-decoration: none;color:white' %>
+           <% end %>
+        <button><%= link_to "Remove","carts/#{item.id}",method: :delete,data: {confirm: 'Are You Sure?'}, style: 'color:#FFFFFF;text-decoration: none;' %></button>
         </div>   
     </li>
 <% end %>
@@ -40,7 +47,7 @@
     <div class="container">
       <h3>Order Details</h3>
       <h5>Total amount:<%= @total_price %></h5>
-      <h5>Email:<%= @userEmail%></h5>
+      <h5>Email:<%= @user.email%></h5>
       <h5>Total items:<%= @carts.count %></h5>
       <div class="clearfix">
         <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn button-1">Cancel</button>

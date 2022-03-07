@@ -13,6 +13,7 @@
  *= require_tree .
  *= require_self
  */
+
 .button-1 {
   background-color: #04AA6D;
   color: white;

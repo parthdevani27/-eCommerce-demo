@@ -28,6 +28,9 @@ gem 'activeadmin'
 gem 'carrierwave'
 gem 'mini_magick'
 
+gem 'sidekiq'
+gem 'sidekiq-cron', git: "https://github.com/citusdata/sidekiq-cron", branch: "hotfix/pipelining_depreciation"
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 

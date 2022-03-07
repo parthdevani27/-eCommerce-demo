@@ -15,7 +15,8 @@
           <p><%= link_to item.product.title , "/products/#{item.product.id}",style: 'text-decoration: none;' %> <br>
               Total Price:<%= item.product.price * item.quantity  %> ||
               quantity:<%= item.quantity %><br>
-              <%= item.product.created_at %>
+              <%= item.created_at %>
+          <strong><%= item.status %></strong>
           </p>
         </div>   
       
